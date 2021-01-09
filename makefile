@@ -1,20 +1,20 @@
 CC = g++ -g
 
-all: insersion merge
+all: insertsort mergesort
 
-insersion: insersion.o
-		$(CC) insersion.o -o insersion
+insersion: insertsort.o
+		$(CC) insertsort.o -o insertsort
 
-merge: merge.o
-		$(CC) merge.o -o merge
+merge: mergesort.o
+		$(CC) mergesort.o -o mergesort
 
-insersion.o: insersion.cpp
-	$(CC) -c insersion.cpp
+insersion.o: insertsort.cpp
+	$(CC) -c insertsort.cpp
 
-merge.o: merge.cpp
-	$(CC) -c merge.cpp
+merge.o: mergesort.cpp
+	$(CC) -c mergesort.cpp
 
 
 
 clean:
-	rm -f *.o insersion merge 
+	rm -f *.o insertsort mergesort
