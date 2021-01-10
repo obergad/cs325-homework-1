@@ -12,41 +12,69 @@
 
 //Expected Input
 /*==============
-* 1 5
+* 1 9 5
 * 6 2 6 3 4 3 4
-* 2 3 6
+* 4 11 4 5 76
 * 5 2 3 5 3 9
 ===============*/
+//Expected Output
+/*==============
+* 2 5 9
+* 6 2 3 3 4 4 6
+* 4 4 5 11 76
+* 5 2 3 3 5 9
+===============*/
 
-using namespace std;
 
-vector<int> sort(vector<int> v){
-
-  int doubleVsizse = v.size(); 
-  for (int i = 0; i < doubleVsizse; i++) {
-
+std::vector<int> sort(std::vector<int> v){
+  int i, key, j, n;
+  n = v.size();
+    for (i = 1 ; i < n; i++) { //start at 1 not 0
+      // std::cout << "begining of for loop" << '\n';
+      key = v[i]; //set key
+      j = i - 1; // set key - 1
+      /*moving elements of v that are greater than the key
+      to one pos ahead of their current pos*/
+      while (j >= 0 && v[j] > key) {
+        // std::cout << "begining of while loop" << '\n';
+        v[j + 1] = v[j];
+        j = j - 1;
+      //end while loop
+      }
+      v[j + 1] = key;
+  //end for loop
   }
-
-
   return v;
 }
 
+void printVector(std::vector<int> v){
+  int vSize = v.size();
+  for (size_t i = 0; i < vSize; i++) {
+    std::cout << v[i] << ' ';
+  }
+    std::cout << '\n';
+}
+
+
 int main(int argc, char const *argv[]) {
-  ifstream file;
-  vector<vector<int> > v;
-  vector<int> inputVector;
+  std::ifstream file;
+  std::vector<int> v;
   int  numint, value, numlines;
   file.open("data.txt");
   while (file >> numint) {
     for (int i = 0; i < numint; i++) {
         file >> value;
-        inputVector.push_back(value);
-        std::cout << value << " ";
+        v.push_back(value);
     }
-        v.push_back(inputVector);
-        cout << endl;
+        printVector(v);
+        std::cout << "Sorting..." << std::endl;
+        v = sort(v);
+        printVector(v);
+        std::cout << '\n';
+        v.clear();
+
   }
-  cout << "done reading file" << '\n';
+  std::cout << "done reading file" << '\n';
   file.close();
   return 0;
 }
