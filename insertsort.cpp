@@ -66,15 +66,12 @@ int main(int argc, char const *argv[]) {
         file >> value;
         v.push_back(value);
     }
-        printVector(v);
-        std::cout << "Sorting..." << std::endl;
         v = sort(v);
         printVector(v);
         std::cout << '\n';
         v.clear();
 
   }
-  std::cout << "done reading file" << '\n';
   file.close();
   return 0;
 }
