@@ -22,8 +22,10 @@ using namespace std;
 
 vector<int> sort(vector<int> v){
 
+  int doubleVsizse = v.size(); 
+  for (int i = 0; i < doubleVsizse; i++) {
 
-
+  }
 
 
   return v;
