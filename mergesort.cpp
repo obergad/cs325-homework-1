@@ -10,7 +10,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
 
 //Expected Input
 /*==============
@@ -20,31 +19,37 @@ using namespace std;
 * 5 2 3 5 3 9
 ===============*/
 
-vector<int> sort(vector<int> v){
-
-
-
+std::vector<int> sort(std::vector<int> v){
 
 
   return v;
 }
 
+void printVector(std::vector<int> v){
+  int vSize = v.size();
+  for (size_t i = 0; i < vSize; i++) {
+    std::cout << v[i] << ' ';
+  }
+    std::cout << '\n';
+}
+
+
 int main(int argc, char const *argv[]) {
-  ifstream file;
-  vector<vector<int> > v;
-  vector<int> inputVector;
+  std::ifstream file;
+  std::vector<int> v;
   int  numint, value, numlines;
   file.open("data.txt");
   while (file >> numint) {
     for (int i = 0; i < numint; i++) {
         file >> value;
-        inputVector.push_back(value);
-        std::cout << value << " ";
+        v.push_back(value);
     }
-        v.push_back(inputVector);
-        cout << endl;
+        v = sort(v);
+        printVector(v);
+        std::cout << '\n';
+        v.clear();
+
   }
-  cout << "done reading file" << '\n';
   file.close();
   return 0;
 }
