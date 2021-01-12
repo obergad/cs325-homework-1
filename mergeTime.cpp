@@ -1,7 +1,7 @@
 /*
 * Name: Adam Oberg
-* File: merge.cpp
-* Description: program to create do a merge sort algorithm
+* File: mergeTime.cpp
+* Description: program to create do a merge sort algorithm and time it
 * Date: 1/8/2021
 */
 #include <iostream>
@@ -9,6 +9,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <chrono>
+
 
 
 //Expected Input
@@ -85,22 +87,32 @@ void printVector(std::vector<int> v){
     std::cout << '\n';
 }
 
+std::vector<int> generateVector(int numValues){
+  std::vector<int> v;
+  int temp;
+  v.push_back(numValues);
+  for (size_t i = 0; i < numValues; i++) {
+    temp = rand() % 10000 + 1;
+    v.push_back(temp);
+  }
+  return v;
+}
 
 int main(int argc, char const *argv[]) {
-  std::ifstream file;
   std::vector<int> v;
+  srand(time(NULL));
   int  numint, value, numlines;
-  file.open("data.txt");
-  while (file >> numint) {
-    for (int i = 0; i < numint; i++) {
-        file >> value;
-        v.push_back(value);
-    }
-    mergeSort(v, 0, v.size() - 1);
-    printVector(v);
-    std::cout << '\n';
+  //Interpreted chrono code from https://www.techiedelight.com/measure-elapsed-time-program-chrono-library/
+  for (size_t i = 5000; i <= 50000; i++) {
+    v = generateVector(i);
+    auto start = std::chrono::steady_clock::now(); //start the clock
+    mergeSort(v, 0, v.size() - 1); // sort
+    auto end = std::chrono::steady_clock::now(); // stop the steady_clock
     v.clear();
+    std::cout << "Ran sort n =" << i << "\nTaking:" <<
+    std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+    << " milliseconds." <<'\n';
+    i += 4999;
   }
-  file.close();
   return 0;
 }

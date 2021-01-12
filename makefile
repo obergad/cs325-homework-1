@@ -1,6 +1,6 @@
-CC = g++ -g
+CC = g++ -std=c++11 -g
 
-all: insertsort mergesort generatetxt
+all: insertsort mergesort generatetxt insertTime mergeTime
 
 insersion: insertsort.o
 		$(CC) insertsort.o -o insertsort

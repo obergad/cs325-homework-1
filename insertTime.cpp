@@ -1,7 +1,7 @@
 /*
 * Name: Adam Oberg
-* File: insersion.cpp
-* Description: program to create do a insersion sort algorithm
+* File: insertTime.cpp
+* Description: program to create do a insersion sort algorithm and time it
 * Date: 1/8/2021
 */
 #include <iostream>
@@ -9,6 +9,9 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+#include <chrono>
 
 std::vector<int> sort(std::vector<int> v){
   int i, key, j, n;
@@ -39,23 +42,32 @@ void printVector(std::vector<int> v){
     std::cout << '\n';
 }
 
+std::vector<int> generateVector(int numValues){
+  std::vector<int> v;
+  int temp;
+  v.push_back(numValues);
+  for (size_t i = 0; i < numValues; i++) {
+    temp = rand() % 10000 + 1;
+    v.push_back(temp);
+  }
+  return v;
+}
 
 int main(int argc, char const *argv[]) {
-  std::ifstream file;
   std::vector<int> v;
+  srand(time(NULL));
   int  numint, value, numlines;
-  file.open("data.txt");
-  while (file >> numint) {
-    for (int i = 0; i < numint; i++) {
-        file >> value;
-        v.push_back(value);
-    }
-        v = sort(v);
-        printVector(v);
-        std::cout << '\n';
-        v.clear();
-
+  //Interpreted chrono code from https://www.techiedelight.com/measure-elapsed-time-program-chrono-library/
+  for (size_t i = 5000; i <= 50000; i++) {
+    v = generateVector(i);
+    auto start = std::chrono::steady_clock::now(); //start the clock
+    v = sort(v); // sort
+    auto end = std::chrono::steady_clock::now(); // stop the steady_clock
+    v.clear();
+    std::cout << "Ran sort n =" << i << "\nTaking:" <<
+    std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+    << " milliseconds." <<'\n';
+    i += 4999;
   }
-  file.close();
   return 0;
 }

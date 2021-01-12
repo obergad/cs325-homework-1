@@ -26,13 +26,13 @@ void merge(std::vector<int> v, int l_index, int middle_index, int r_index){
   int num2 = r_index - middle_index;
   int i, j;
   //temp vectors
-  std::vector<int> aRight;
-  std::vector<int> aLeft;
+  std::vector<int> vRight;
+  std::vector<int> vLeft;
   //copy data from v to temp1 and 2
   for (i = 0; i < num1; i++)
-    aRight.push_back(v[l_index + i]);
+    vRight.push_back(v[l_index + i]);
   for (j = 0; j < num2; j++)
-    aLeft.push_back(v[middle_index + 1 + j]);
+    vLeft.push_back(v[middle_index + 1 + j]);
 
   i = 0;
   j = 0; // reset i and j
@@ -40,26 +40,26 @@ void merge(std::vector<int> v, int l_index, int middle_index, int r_index){
   int k = l_index;
 
   while (i < num1 && j < num2) {
-    if(aRight[i] <= aLeft[j]){
-      v[k] = aLeft[i];
+    if(vRight[i] <= vLeft[j]){
+      v[k] = vLeft[i];
       i++;
     }
     else{
-      v[k] = aRight[j];
+      v[k] = vRight[j];
       j++;
     }
     k++;
   }
-//copy elements of aLeft if ther is any
+//copy elements of vleft if ther is any
 while (i < num1) {
-  v[k] = aLeft[i];
+  v[k] = vLeft[i];
   i++;
   k++;
 }
 //These two while loops merge the arrays togeather
-//copy elements of aRight if ther is any
+//copy elements of vright if ther is any
 while (j < num2) {
-  v[k] = aRight[j];
+  v[k] = vRight[j];
   j++;
   k++;
 }
