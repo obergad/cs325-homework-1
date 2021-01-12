@@ -20,5 +20,17 @@ generatetxt: generatetxt.o
 generatetxt.o: generatetxt.cpp
 	$(CC) -c generatetxt.cpp
 
+insertTime: insertTime.o
+		$(CC) insertTime.o -o insertTime
+
+insertTime.o: insertTime.cpp
+	$(CC) -c insertTime.cpp
+
+mergeTime: mergeTime.o
+		$(CC) mergeTime.o -o mergeTime
+
+mergeTime.o: mergeTime.cpp
+	$(CC) -c mergeTime.cpp
+
 clean:
-	rm -f *.o insertsort mergesort generatetxt
+	rm -f *.o insertsort mergesort generatetxt mergeTime insertTime
